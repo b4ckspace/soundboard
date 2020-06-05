@@ -1,0 +1,19 @@
+{
+  "name": "backspace-soundboard",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "^3.0.2",
+    "express": "~4.16.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "mumble": "^0.3.21"
+  }
+}
