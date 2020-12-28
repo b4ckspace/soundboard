@@ -10,3 +10,4 @@ mount sound files into `app/sounds`
 * `MQTT_TOPIC = 'psa/sound'`
 * `MQTT_FALLBACK_DIR = 'space'`
 * `MUMBLE_URL = 'mumble://example.com'`
+* `MUMBLE_RECONNECT_INTERVAL = 30000`
