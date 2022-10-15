@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width"/>
     <script src="/js/client.js"></script>
     <link rel="stylesheet" href="/css/main.css">
+    <style id="search-stlye"></style>
 </head>
 <body>
 <div class="container">
@@ -18,6 +19,7 @@
                     <button class="button emoji auto-stop" title="STOP DAS OHNE SEHNENSCHEIDENENTZÜNDUNG"><span class="auto">🚗</span></button>
                     <button class="button emoji toggle-dark-mode" title="Dark Mode">🌑</button>
                 </div>
+                <input id="search" placeholder="search" type="text" accesskey="f"/>
             </div>
             <nav class="main-navigation">
                 <ul>
@@ -35,9 +37,9 @@
             <div class="group card" id="<%= group.name %>">
                 <h2 class="group-header card-header"><%= group.name %></h2>
                 <div class="card-body">
-                    <button type="button" class="sound-button" data-group="<%= group.name %>" data-sound="_random_">Random</button>
+                    <button type="button" class="sound-button random-button" data-group="<%= group.name %>" data-sound="_random_">Random</button>
                     <% for (let sound of group.sounds) { %>
-                        <button type="button" class="sound-button" data-group="<%= group.name %>" data-sound="<%= sound.name %>"><%= sound.name %></button>
+                        <button type="button" class="sound-button regular-sound" data-group="<%= group.name %>" data-sound="<%= sound.name %>"><%= sound.name %></button>
                     <% } %>
                 </div>
             </div>

@@ -109,10 +109,11 @@ li a:focus {
 
 .group {
     margin: var(--default-padding);
+    border: 2px solid var(--card-background);
 }
 
 .group:target {
-    border: 1px solid var(--highlight);
+    border: 2px solid var(--highlight);
 }
 
 .group-header {
@@ -148,6 +149,12 @@ li a:focus {
     padding: 0.5em var(--default-padding);
 }
 
+#search {
+    display: block;
+    width: 100%;
+    padding: 0.4em;
+}
+
 .sidebar .buttons {
     display: flex;
     flex-direction: row;
@@ -156,12 +163,12 @@ li a:focus {
 }
 
 .sidebar .buttons .button {
-    flex: 0 0 33%;
+    flex: 0 0 33.333%;
     padding: 0.1em var(--default-padding)
 }
 
-button {
-    cursor: pointer;
+button,
+input {
     font: inherit;
     padding: 0.2em 0.3em;
     border: 1px solid var(--accent);
@@ -169,8 +176,14 @@ button {
     color: var(--foreground-color);
 }
 
+button {
+    cursor: pointer;
+}
+
 button:hover,
-button:focus {
+button:focus,
+input:hover,
+input:focus {
     background: var(--accent);
     border: 1px solid var(--highlight);
 }
@@ -222,22 +235,41 @@ button:active {
     margin: 0 0.3em 0.4em 0;
 }
 
-@media (min-width: 500px) {
-    .container {
-        display: flex;
-        flex-direction: row;
-        justify-content: stretch;
-        align-items: stretch;
-        max-height: 100vh;
-    }
+.search-active .sound-button {
+    display: none;
+}
 
-    .sidebar {
-        flex: 1 0 30%;
-        min-width: 300px;
-        max-width: 500px;
-    }
+.search-active .group {
+    display: none;
+}
 
-    .main {
-        overflow-y: auto;
-    }
+.search-active .group.search-display {
+    display: block;
+}
+
+.search-active .main-navigation li {
+    display: none;
+}
+
+.search-active .main-navigation li.search-display {
+    display: list-item;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: stretch;
+    height: 100vh;
+}
+
+.sidebar {
+    flex: 1 0 30%;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+.main {
+    overflow-y: auto;
+    flex: 100%;
 }

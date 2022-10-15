@@ -1,4 +1,5 @@
 window.addEventListener('load', async () => {
+    'use strict';
     let darkModeEnabled = false;
     let pref = localStorage.getItem('dark-mode');
     let darkModeButton = document.querySelector('.button.toggle-dark-mode');
@@ -81,5 +82,44 @@ window.addEventListener('load', async () => {
                 autoStopInterval = null;
             }
         }
+    });
+
+    const html = document.querySelector('html');
+    const style = document.querySelector('#search-stlye');
+    const searchBar = document.querySelector('#search');
+    searchBar.value = null;
+    let timeout = null;
+
+    const handleSearch = () => {
+        const query = searchBar.value;
+
+        if (query) {
+            html.classList.add('search-active');
+            style.innerHTML = `.regular-sound[data-sound*="${query}" i] {display: inline-block;}`;
+            const elements = document.querySelectorAll('.search-display');
+            for (const element of elements) {
+                element.classList.remove('search-display');
+            }
+
+            const activeButtons = document.querySelectorAll(`.regular-sound[data-sound*="${query}" i]`);
+            for (const activeButton of activeButtons) {
+                const groupEl = activeButton.parentElement.parentElement;
+                groupEl.classList.add('search-display');
+                const link = document.querySelector(`.nav-link[href="#${groupEl.id}"]`);
+                link.parentElement.classList.add('search-display');
+            }
+
+        } else {
+            html.classList.remove('search-active');
+            style.innerHTML = '';
+        }
+        timeout = null;
+    }
+
+    searchBar.addEventListener('keyup', e => {
+        if (timeout) {
+           clearTimeout(timeout);
+        }
+        timeout = setTimeout(handleSearch, 100);
     });
 });
