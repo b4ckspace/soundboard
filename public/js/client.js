@@ -118,8 +118,21 @@ window.addEventListener('load', async () => {
 
     searchBar.addEventListener('keyup', e => {
         if (timeout) {
-           clearTimeout(timeout);
+            clearTimeout(timeout);
         }
         timeout = setTimeout(handleSearch, 100);
+
+        if (e.keyCode === 13) {
+            setTimeout(() => {
+                const query = searchBar.value;
+
+                if (!query) return;
+                const firstButton = document.querySelector(`.regular-sound[data-sound*="${query}" i]`);
+
+                if (!firstButton) return;
+                firstButton.click();
+            }, 100);
+        }
     });
+
 });
