@@ -4,6 +4,11 @@ mount sound files into `app/sounds`
 
 ## environment variables
 
+* `PLAYER = 'mumble'`
+* or
+* `PLAYER = 'snapcast'`
+ 
+
 * `MUMBLE_USER = 'brett'`
 * `SNAPCAST_FIFO = '/tmp/snapfifo'`
 * `MQTT_BROKER = 'mqtt://localhost'`
