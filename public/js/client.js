@@ -101,13 +101,15 @@ window.addEventListener('load', async () => {
 
         if (query) {
             html.classList.add('search-active');
-            style.innerHTML = `.regular-sound[data-sound*="${query}" i] {display: inline-block;}`;
+            let selector = `.regular-sound[data-sound*="${query}" i], .group[data-group*="${query}" i] .regular-sound`;
+
+            style.innerHTML = `${selector} {display: inline-block;}`;
             const elements = document.querySelectorAll('.search-display');
             for (const element of elements) {
                 element.classList.remove('search-display');
             }
 
-            const activeButtons = document.querySelectorAll(`.regular-sound[data-sound*="${query}" i]`);
+            const activeButtons = document.querySelectorAll(selector);
             for (const activeButton of activeButtons) {
                 const groupEl = activeButton.parentElement.parentElement;
                 groupEl.classList.add('search-display');
