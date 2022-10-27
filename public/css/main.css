@@ -5,11 +5,13 @@
     --aae-blue-light: #286dd7;
     --default-padding: 1rem;
     --sidebar-width: 200px;
+    --header-height: 100px;
 
     --card-background: #dededf;
     --accent: rgba(0, 0, 0, 0.05);
     --highlight: var(--aae-blue);
     --background-color: var(--light);
+    --background-color-transparent: rgba(221, 221, 221, 0.5);
     --foreground-color: var(--dark);
     --heading-color: var(--aae-blue);
     --button-background: transparent;
@@ -20,6 +22,7 @@
     --accent: rgba(255, 255, 255, 0.05);
     --highlight: var(--aae-blue-light);
     --background-color: var(--dark);
+    --background-color-transparent: rgba(20, 20, 20, 0.6);
     --foreground-color: var(--light);
     --heading-color: var(--aae-blue-light);
 }
@@ -112,59 +115,21 @@ li a:focus {
     border: 2px solid var(--card-background);
 }
 
-.group:target {
+.anchor:target + .group {
     border: 2px solid var(--highlight);
 }
 
 .group-header {
     position: sticky;
     top: 0;
+    word-break: break-all;
     background: var(--card-background);
-}
-
-.sidebar {
-    padding: var(--default-padding);
-}
-
-.sidebar .card {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 0;
-}
-
-.sidebar .card-header {
-    flex: 0 0 auto;
-}
-
-.sidebar {
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    padding-right: 0;
-}
-
-.sidebar .controls {
-    flex: 0 0 auto;
-    padding: 0.5em var(--default-padding);
 }
 
 #search {
     display: block;
     width: 100%;
     padding: 0.4em;
-}
-
-.sidebar .buttons {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: stretch;
-}
-
-.sidebar .buttons .button {
-    flex: 0 0 33.333%;
-    padding: 0.1em var(--default-padding)
 }
 
 button,
@@ -214,18 +179,16 @@ button:active {
     animation: STOPPP 1s linear infinite;
 }
 
-.sidebar .main-navigation {
-    flex: 100%;
-    position: relative;
+.dark-mode-emoji {
+    display: none;
 }
 
-.sidebar .main-navigation ul {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    top: 0;
-    overflow-y: auto;
+.dark-mode .dark-mode-emoji {
+    display: inline;
+}
+
+.dark-mode .light-mode-emoji {
+    display: none;
 }
 
 .sound-button {
@@ -255,21 +218,125 @@ button:active {
     display: list-item;
 }
 
-.container {
-    display: flex;
-    flex-direction: row;
-    justify-content: stretch;
-    align-items: stretch;
-    height: 100vh;
-}
-
-.sidebar {
-    flex: 1 0 30%;
-    min-width: 300px;
-    max-width: 500px;
-}
-
 .main {
     overflow-y: auto;
     flex: 100%;
 }
+
+.sidebar {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.sidebar .card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
+}
+
+.sidebar .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.sidebar .buttons .button {
+    flex: 0 0 25%;
+    padding: 0.1em var(--default-padding)
+}
+
+.sidebar .card-header {
+    flex: 0 0 auto;
+}
+
+.sidebar .controls {
+    flex: 0 0 auto;
+    padding: 0.5em var(--default-padding);
+}
+
+.sidebar .main-navigation {
+    flex: 100%;
+    position: relative;
+}
+
+.sidebar .main-navigation ul {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    padding: 0;
+}
+
+
+@media (max-width: 799px) {
+    .main {
+        margin-top: var(--header-height);
+    }
+
+    .anchor {
+        position: relative;
+        bottom: var(--header-height);
+    }
+
+    .sidebar {
+        height: var(--header-height);
+    }
+
+    .sidebar .card-header {
+        display: none;
+    }
+
+    .sidebar .main-navigation {
+        height: 0;
+        overflow: hidden;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--background-color-transparent);
+        backdrop-filter: blur(5px);
+        transition: height 0.3s ease 0s;
+    }
+
+    .menu-open .sidebar .main-navigation {
+        height: calc(100vh - var(--header-height));
+        overflow: hidden;
+    }
+}
+
+@media (min-width: 800px) {
+    .container {
+        display: flex;
+        flex-direction: row;
+        justify-content: stretch;
+        align-items: stretch;
+        height: 100vh;
+    }
+
+    .sidebar {
+        position: static;
+        width: auto;
+        flex: 1 0 30%;
+        min-width: 300px;
+        max-width: 500px;
+        padding: var(--default-padding);
+        padding-right: 0;
+    }
+
+    .sidebar .buttons .button {
+        flex: 0 0 33.3333%;
+        padding: 0.1em var(--default-padding)
+    }
+
+    .toggle-menu {
+        display: none;
+    }
+}
+

@@ -17,7 +17,11 @@
                 <div class="buttons">
                     <button class="button stop-button" title="STOP DAS"><img src="/img/stop.gif" alt="STOP DAS"/></button>
                     <button class="button emoji auto-stop" title="STOP DAS OHNE SEHNENSCHEIDENENTZÜNDUNG"><span class="auto">🚗</span></button>
-                    <button class="button emoji toggle-dark-mode" title="Dark Mode">🌑</button>
+                    <button class="button emoji toggle-dark-mode" title="Toggle Dark Mode">
+                        <span class="light-mode-emoji">😎</span>
+                        <span class="dark-mode-emoji">🌚</span>
+                    </button>
+                    <button class="button emoji toggle-menu" title="Menu">🍔</button>
                 </div>
                 <input id="search" placeholder="search" type="text" accesskey="f"/>
             </div>
@@ -34,7 +38,8 @@
     </aside>
     <main class="main">
         <% for (let group of soundData) { %>
-            <div class="group card" id="<%= group.name %>">
+            <a class="anchor" id="<%= group.name %>"></a>
+            <div class="group card" data-group="<%= group.name %>">
                 <h2 class="group-header card-header"><%= group.name %></h2>
                 <div class="card-body">
                     <button type="button" class="sound-button random-button" data-group="<%= group.name %>" data-sound="_random_">Random</button>

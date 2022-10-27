@@ -59,7 +59,12 @@ window.addEventListener('load', async () => {
 
     const stop = async () => {
         await fetch(stopUrl, {method: 'POST'});
-    }
+    };
+
+    const toggleMenu = () => isMenuOpen() ? closeMenu() : openMenu();
+    const openMenu = () => document.body.classList.add('menu-open');
+    const closeMenu = () => document.body.classList.remove('menu-open');
+    const isMenuOpen = () => document.body.classList.contains('menu-open');
 
     const buttons = document.querySelectorAll('.sound-button');
 
@@ -67,8 +72,9 @@ window.addEventListener('load', async () => {
         button.addEventListener('click', buttonHandler);
     }
 
+    document.querySelector('.main-navigation').addEventListener('click', closeMenu);
+    document.querySelector('.toggle-menu').addEventListener('click', toggleMenu);
     document.querySelector('.stop-button').addEventListener('click', stop);
-
     document.querySelector('.auto-stop').addEventListener('click', () => {
         autoStop = !autoStop;
 
@@ -105,7 +111,7 @@ window.addEventListener('load', async () => {
             for (const activeButton of activeButtons) {
                 const groupEl = activeButton.parentElement.parentElement;
                 groupEl.classList.add('search-display');
-                const link = document.querySelector(`.nav-link[href="#${groupEl.id}"]`);
+                const link = document.querySelector(`.nav-link[href="#${groupEl.dataset.group}"]`);
                 link.parentElement.classList.add('search-display');
             }
 
